@@ -1,2 +1,36 @@
-<h1>Game#game</h1>
-<p>Find me in app/views/game/game.html.erb</p>
+<div class="container">
+  <form class="form-inline" action="/game" method="get">
+    <label class="mr-sm-2" for="grid">Preference</label>
+    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="grid" name="grid" value="9">
+      <option selected>Choose...</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+    </select>
+
+    <input type="submit" class="form-control" value="Generate grid!">
+    <% @start = Time.now  %>
+    <input type="hidden" name="start" value="<%= @start %>">
+  </form>
+  <div class="grid ">
+      <div class="row">
+        <% @grid.each do |letter| %>
+            <div class="col-md-1">
+              <h3><%=letter%></h3>
+            </div>
+        <% end  %>
+  </div>
+
+  <form action="/score" method="get">
+    <div class="form-group">
+      <label for="word">Find a word in the grid!</label>
+      <input type="text" id="word" name="word" placeholder="You're on the clock!">
+      <input type="submit" class="form-control" value="DONE!">
+      <input type="hidden" name="time" value="<%= Time.now - @start %>">
+      <input type="hidden" name="grid" value="<%= @grid.join('') %>">
+    </div>
+  </form>
+</div>

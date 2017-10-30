@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  get 'game/game'
-
-  get 'game/score'
-
+  get 'game', to: 'game#game'
+  get 'score', to: 'game#score'
+  post 'score', to: 'game#score'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
